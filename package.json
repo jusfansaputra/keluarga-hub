@@ -1,0 +1,17 @@
+{
+  "name": "keluarga-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplikasi web keluarga: profil keluarga, aset, keuangan bersama, CCTV (XMEye/go2rtc), Smart Home (Tuya Smart Life), galeri, agenda, belanja, dan tugas rumah.",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node --no-warnings server/index.js",
+    "dev": "node --no-warnings --watch server/index.js",
+    "reset": "node --no-warnings server/reset.js"
+  },
+  "dependencies": {},
+  "license": "MIT"
+}

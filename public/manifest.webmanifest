@@ -1,0 +1,20 @@
+{
+  "name": "Keluarga Hub — Portal Keluarga",
+  "short_name": "Keluarga",
+  "description": "Portal keluarga: keuangan bersama, aset, agenda, tugas, CCTV, smart home, dan galeri foto/video.",
+  "lang": "id",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    {
+      "src": "/icons/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

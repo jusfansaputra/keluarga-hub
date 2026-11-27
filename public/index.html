@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b1020" />
+<title>Keluarga Hub — Portal Keluarga</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236366f1'/%3E%3Cpath d='M16 7l8 6v11h-5v-6h-6v6H8V13z' fill='white'/%3E%3C/svg%3E" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/icon-1024.png" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- ============================ LOGIN / REGISTER ============================ -->
+<div id="auth-screen" class="auth-screen hidden">
+  <div class="auth-bg"></div>
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="auth-logo">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.5"/><path d="M9.5 21v-6h5v6"/></svg>
+      </div>
+      <div>
+        <h1 id="auth-family-name">Keluarga Hub</h1>
+        <p id="auth-family-motto">Portal privat khusus anggota keluarga</p>
+      </div>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-authtab="login">Masuk</button>
+      <button class="auth-tab" data-authtab="register">Anggota Baru</button>
+    </div>
+
+    <form id="login-form" class="auth-form">
+      <label class="field"><span>Username</span>
+        <input name="username" autocomplete="username" required placeholder="mis. budi" />
+      </label>
+      <label class="field"><span>Password</span>
+        <div class="pw-wrap">
+          <input name="password" type="password" autocomplete="current-password" required placeholder="••••••••" />
+          <button type="button" class="pw-toggle" aria-label="Tampilkan password">👁</button>
+        </div>
+      </label>
+      <div id="login-error" class="auth-error hidden"></div>
+      <button class="btn btn-primary btn-block" type="submit">Masuk ke Portal Keluarga</button>
+      <div class="auth-hint">
+        <strong>Akun contoh</strong> — admin: <code>budi</code> / <code>sari</code>, anggota: <code>dimas</code>, <code>ayu</code>, <code>hendra</code>. Password: <code>keluarga123</code>
+      </div>
+    </form>
+
+    <form id="register-form" class="auth-form hidden">
+      <label class="field"><span>Kode Undangan Keluarga</span>
+        <input name="code" required placeholder="mis. WIJAYA-DEMO" style="text-transform:uppercase" />
+      </label>
+      <label class="field"><span>Nama Lengkap</span><input name="name" required placeholder="Nama Anda" /></label>
+      <div class="field-row">
+        <label class="field"><span>Username</span><input name="username" required placeholder="pilih username" /></label>
+        <label class="field"><span>Status di Keluarga</span>
+          <select name="relation">
+            <option>Anak</option><option>Ayah</option><option>Ibu</option><option>Kakek</option>
+            <option>Nenek</option><option>Cucu</option><option>Saudara</option><option>Anggota</option>
+          </select>
+        </label>
+      </div>
+      <label class="field"><span>Password</span><input name="password" type="password" required minlength="6" placeholder="minimal 6 karakter" /></label>
+      <div id="register-error" class="auth-error hidden"></div>
+      <button class="btn btn-primary btn-block" type="submit">Buat Akun &amp; Masuk</button>
+      <div class="auth-hint">Akses dibatasi: akun hanya bisa dibuat dengan kode undangan dari admin keluarga.</div>
+    </form>
+  </div>
+</div>
+
+<!-- ================================ APP SHELL =============================== -->
+<div id="app" class="app hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="side-brand">
+      <div class="auth-logo small">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.5"/><path d="M9.5 21v-6h5v6"/></svg>
+      </div>
+      <div class="side-brand-text">
+        <strong id="side-family-name">Keluarga</strong>
+        <small>Hub Keluarga</small>
+      </div>
+    </div>
+    <nav class="side-nav" id="side-nav"></nav>
+    <div class="side-foot">
+      <div class="side-status" id="side-status"></div>
+      <button class="btn btn-ghost btn-sm" id="btn-logout">Keluar</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="btn-menu" aria-label="Menu">☰</button>
+      <div class="topbar-title">
+        <h2 id="page-title">Dashboard</h2>
+        <p id="page-sub">Ringkasan hari ini</p>
+      </div>
+      <div class="topbar-actions">
+        <div class="search-box">
+          <input id="global-search" placeholder="Cari transaksi, aset, agenda…" />
+        </div>
+        <button class="btn btn-primary btn-sm" id="btn-quick">＋ Catat Cepat</button>
+        <button class="icon-btn" id="btn-theme" title="Ganti tema">◐</button>
+        <button class="icon-btn badge-btn" id="btn-notif" title="Notifikasi">🔔<span class="badge" id="notif-count">0</span></button>
+        <button class="user-chip" id="btn-user"></button>
+      </div>
+    </header>
+    <main class="content" id="view"></main>
+    <nav class="bottom-nav only-mobile" id="bottom-nav"></nav>
+  </div>
+</div>
+
+<div class="scrim hidden" id="scrim"></div>
+<div id="modal-root"></div>
+<div id="toast-root" class="toast-root"></div>
+<div id="lightbox-root"></div>
+
+<script src="/js/ui.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/views-core.js"></script>
+<script src="/js/views-smart.js"></script>
+<script src="/js/views-life.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
